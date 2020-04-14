@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<input type="file" id="myfile" />
+		<img src="" style="width: 300px;">
+		<canvas id="mycanvas"></canvas>
+		<a href="" download="canvas">下载</a>
+		<script>
+			let myimg = document.querySelector("img");
+			let mycanvas = document.querySelector("#mycanvas");
+			let ctx = mycanvas.getContext("2d");
+			let mybutton = document.querySelector("#mybutton");
+			let mya = document.querySelector("a");
+			let myfile = document.querySelector("#myfile");
+			myfile.addEventListener("change",myfn)
+			function myfn(){
+				const reader = new FileReader();
+				file = myfile.files[0];
+				console.log(file);
+				reader.readAsDataURL(file);
+				reader.onload = function(e){
+					//图片路径修改
+					myimg.src = e.target.result;
+					console.log(myimg.offsetWidth + "," +myimg.offsetHeight);
+					myimg.onload = function(){
+						//设置画布宽高
+						mycanvas.width = myimg.offsetWidth;
+						mycanvas.height = myimg.offsetHeight;
+						ctx.drawImage(myimg, 0, 0,myimg.offsetWidth,myimg.offsetHeight);
+						//画布转base64
+						let url = mycanvas.toDataURL("image/jpeg");
+						mya.addEventListener("click",function(){
+							console.log(url);
+							//a标签添加base64下载链接
+							mya.setAttribute("href",url)
+						})
+					}
+					
+				}
+				
+			}
+			
+				
+
+				
+
+			
+		</script>
+	</body>
+</html>
