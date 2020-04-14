@@ -32,7 +32,7 @@
 						mycanvas.height = myimg.offsetHeight;
 						ctx.drawImage(myimg, 0, 0,myimg.offsetWidth,myimg.offsetHeight);
 						//画布转base64
-						let url = mycanvas.toDataURL("image/jpeg");
+						let url = mycanvas.toDataURL("image/jpeg",1);
 						mya.addEventListener("click",function(){
 							console.log(url);
 							//a标签添加base64下载链接
